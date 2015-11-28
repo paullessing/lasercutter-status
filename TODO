@@ -1,0 +1,12 @@
+- node-cron to fetch information regularly (slower if laser cutter is up?)
+- store last state in mongo or FS
+- On page load, display last state (fetch if too old)
+- When down, show form
+  - Allow form submission, store email in mongodb
+  - On fetch if status changes email users and clear DB
+  - Maybe avoid spam attacks somehow? Login/confirmation mechanism?
+- When up & in use, show message
+  - Allow "Notify me when done"
+  - Use chrome notifications
+  - Maybe serviceworker.js?
+  - Maybe chrome push notifications?
