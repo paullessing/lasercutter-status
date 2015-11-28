@@ -3,6 +3,12 @@ import * as request from 'request-promise';
 
 class LaserCutterService {
     public getStatus(force?: boolean): Promise<Tool> {
+        //return Promise.resolve(new Tool({
+        //    name: 'LaserCutter SilverTail',
+        //    status: 'Out of service',
+        //    status_message: 'OK',
+        //    in_use: 'no'
+        //}));
         return this.fetchFromHttp();
     }
 
