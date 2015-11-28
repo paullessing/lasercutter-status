@@ -10,3 +10,4 @@
   - Use chrome notifications
   - Maybe serviceworker.js?
   - Maybe chrome push notifications?
+- Auto run TSC on npm install
