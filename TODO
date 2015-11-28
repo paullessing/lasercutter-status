@@ -1,6 +1,5 @@
 - node-cron to fetch information regularly (slower if laser cutter is up?)
-- store last state in mongo or FS
-- On page load, display last state (fetch if too old)
+- Add useful links
 - When down, show form
   - Allow form submission, store email in mongodb
   - On fetch if status changes email users and clear DB
@@ -10,4 +9,5 @@
   - Use chrome notifications
   - Maybe serviceworker.js?
   - Maybe chrome push notifications?
+- When unknown, link to tools page
 - Auto run TSC on npm install
