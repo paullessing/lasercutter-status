@@ -6,16 +6,21 @@ var port = 8081;
 
 // set up ========================
 import express        = require('express');
-//import mongoose       = require('mongoose');        // mongoose for mongodb
+import mongoose       = require('mongoose');        // mongoose for mongodb
 import morgan         = require('morgan');          // log requests to the console (express4)
 import bodyParser     = require('body-parser');     // pull information from HTML POST (express4)
 //import methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+import path           = require('path');
 var app               = express();                  // create our app w/ express
 
-import { ToolService } from './services/toolService';
+import { LaserCutterService } from './services/LaserCutterService';
 import { Tool } from './entities/tool';
 
-//mongoose.connect('mongodb://localhost:27017/putit_at');
+mongoose.connect('mongodb://localhost:27017/lasercutter_status');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
@@ -44,6 +49,24 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 //        res.send({ success: false, errors: errors }); // TODO
 //    });
 //});
+
+app.get('/status', (req: express.Request, res: express.Response) => {
+    LaserCutterService.getStatus(true).then(laserCutter => {
+        console.log(laserCutter);
+        return {
+            status: laserCutter.isUp ? 'UP' : 'DOWN',
+            inUse: laserCutter.isInUse
+        };
+    }, err => {
+        console.log("Error", err);
+        return {
+            status: 'UNKNOWN',
+            inUse: false
+        };
+    }).then(status => {
+        res.status(200).contentType("application/json").send(status).end();
+    });
+});
 
 app.listen(port);
 console.log("App listening on port " + port);

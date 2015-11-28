@@ -1,5 +1,12 @@
 {
   "name": "lasercutter-status",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.8",
+    "morgan": "^1.6.1",
+    "request-promise": "^1.0.2"
+  }
 }
