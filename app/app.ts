@@ -1,6 +1,6 @@
 ///<reference path='../typings/tsd.d.ts' />
 
-var port = 8081;
+var port = 8090;
 
 // Instructions from https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
 
@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/lasercutter_status');
 app.set('views', path.join(__dirname, '..', 'resources/views'));
 app.set('view engine', 'hbs');
 
-app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
+app.use(express.static(path.join(__dirname, '..', 'public')));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({'extended': true }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
