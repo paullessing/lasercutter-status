@@ -1,5 +1,10 @@
 ///<reference path='../typings/tsd.d.ts' />
 
+import { LaserCutterService } from './services/LaserCutterService';
+import { NotificationService } from './services/NotificationService';
+import { Tool } from './entities/tool';
+import { Status } from "./entities/status";
+
 var port = 8090;
 
 // Instructions from https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
@@ -12,9 +17,6 @@ import bodyParser     = require('body-parser');     // pull information from HTM
 //import methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 import path           = require('path');
 var app               = express();                  // create our app w/ express
-
-import { LaserCutterService } from './services/LaserCutterService';
-import { Tool } from './entities/tool';
 
 mongoose.connect('mongodb://localhost:27017/lasercutter_status');
 
@@ -30,12 +32,37 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 //app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.get('/', (req: express.Request, res: express.Response) => {
-    LaserCutterService.getStatus(false).then(laserCutter => {
+    var statusPromise: Promise<Status> = req.query['debug'] ? Promise.resolve({
+        fetchedAt: new Date(),
+        isUp: req.query['debug'] === 'up',
+        isInUse: typeof req.query['inUse'] !== 'undefined'
+    }) : LaserCutterService.getStatus(false);
+
+    statusPromise.then(laserCutter => {
         res.render('index', {
             title: 'Is the Laser Cutter Working?',
-            statusYesNo: laserCutter.isUp ? 'Yes' : 'No',
+            isUp: laserCutter.isUp,
             inUse: laserCutter.isInUse
         });
+    }).catch(err => {
+        res.status(500).end();
+    });
+});
+
+app.post('/notifyme', (req: express.Request, res: express.Response) => {
+    var email = req.body['email'];
+
+    console.log("Requesting notification", email);
+
+    NotificationService.requestNotification(email).then(() => {
+        res.redirect('/?success');
+    }).catch(err => {
+        if (err === 'invalid-email') {
+            res.redirect('/?failure=email')
+        } else {
+            console.log("Error submitting email", err);
+            res.redirect('/?failure');
+        }
     });
 });
 

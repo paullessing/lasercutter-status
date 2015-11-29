@@ -1,6 +1,7 @@
 import {ToolDto, Tool} from "../entities/tool";
 import { StatusRepository } from '../repository/StatusRepository';
 import { Status } from "../entities/status";
+import { NotificationService } from './NotificationService';
 import * as request from 'request-promise';
 import * as moment from 'moment';
 
@@ -16,6 +17,13 @@ class LaserCutterService {
             }
             return this.fetchFromHttp().then(tool => {
                 return StatusRepository.save(tool.isUp, tool.isInUse);
+            }).catch(err => {
+                console.log("An error happened fetching the data", err);
+                if (status) {
+                    return status;
+                } else {
+                    throw err;
+                }
             });
         }).catch(err => {
             console.log("Uncaught error", err);

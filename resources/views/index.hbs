@@ -3,14 +3,24 @@
 <head>
 	<title>{{title}}</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="c-content">
-		<h1 class="c-status">{{ statusYesNo }}</h1>
-		{{#if inUse }}
-			<h3 class="c-in-use">...but someone's on it right now.</h3>
+		{{#if isUp}}
+			<h1 class="c-status">Yes</h1>
+			{{#if inUse }}
+				<h3 class="c-in-use">...but someone's on it right now.</h3>
+			{{/if}}
 		{{/if}}
+		{{#unless isUp }}
+			<h1 class="c-status">No</h1>
+			<form class="c-down-form" method="post" action="/notifyme">
+				<p class="c-down-form__intro">Leave your email and we will let you know when it's back up.</p>
+				<input class="c-down-form__email" type="email" name="email" placeholder="user@lasercutter.com" required />
+				<input class="c-down-form__submit" type="submit" value="Let me know!" />
+			</form>
+		{{/unless}}
 	</div>
 </body>
 </html>

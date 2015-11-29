@@ -97,3 +97,41 @@ html {
     font-family: Montserrat, sans-serif;
     font-weight: 700;
 }
+
+.c-down-form {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.c-down-form__intro {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.c-down-form__email {
+    height: 50px;
+    font-size: 2rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    width: 100%;
+    min-width: 320px;
+    max-width: 500px;
+    outline: none;
+    margin-bottom: 20px;
+    border: 0;
+    text-align: center;
+}
+
+.c-down-form__submit {
+    outline: none;
+    border-radius: 4px;
+    background-color: white;
+    color: #363636;
+    font-size: 2rem;
+    border: 0;
+    padding: 10px 40px;
+}
