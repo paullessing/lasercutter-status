@@ -33,7 +33,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     LaserCutterService.getStatus(false).then(laserCutter => {
         res.render('index', {
             title: 'Is the Laser Cutter Working?',
-            statusYesNo: laserCutter.isUp ? 'Yes!' : 'No.',
+            statusYesNo: laserCutter.isUp ? 'Yes' : 'No',
             inUse: laserCutter.isInUse
         });
     });

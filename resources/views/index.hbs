@@ -1,4 +1,16 @@
-<h1 class="c-status">{{ statusYesNo }}</h1>
-{{#if inUse }}
-	<h3 class="c-in-use">...but someone's on it right now.</h3>
-{{/if}}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="c-content">
+		<h1 class="c-status">{{ statusYesNo }}</h1>
+		{{#if inUse }}
+			<h3 class="c-in-use">...but someone's on it right now.</h3>
+		{{/if}}
+	</div>
+</body>
+</html>

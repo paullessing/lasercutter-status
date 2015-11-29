@@ -6,12 +6,6 @@ import * as moment from 'moment';
 
 class LaserCutterService {
     public getStatus(force?: boolean): Promise<Status> {
-        //return Promise.resolve(new Tool({
-        //    name: 'LaserCutter SilverTail',
-        //    status: 'Out of service',
-        //    status_message: 'OK',
-        //    in_use: 'no'
-        //}));
         return StatusRepository.getLatest().then(status => {
             if (status) {
                 var recently = moment().subtract(5, 'minutes');
