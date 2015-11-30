@@ -35,14 +35,15 @@ app.get('/', (req: express.Request, res: express.Response) => {
     var statusPromise: Promise<Status> = req.query['debug'] ? Promise.resolve({
         fetchedAt: new Date(),
         isUp: req.query['debug'] === 'up',
-        isInUse: typeof req.query['inUse'] !== 'undefined'
+        isInUse: typeof req.query['inUse'] !== 'undefined',
     }) : LaserCutterService.getStatus(false);
 
     statusPromise.then(laserCutter => {
         res.render('index', {
             title: 'Is the Laser Cutter Working?',
             isUp: laserCutter.isUp,
-            inUse: laserCutter.isInUse
+            inUse: laserCutter.isInUse,
+            status: laserCutter.isUp ? 'up' : 'down'
         });
     }).catch(err => {
         res.status(500).end();
@@ -71,7 +72,7 @@ app.get('/status', (req: express.Request, res: express.Response) => {
         console.log(laserCutter);
         return {
             status: laserCutter.isUp ? 'UP' : 'DOWN',
-            inUse: laserCutter.isInUse
+            inUse: laserCutter.isInUse,
         };
     }, err => {
         console.log("Error", err);
