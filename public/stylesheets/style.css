@@ -99,6 +99,7 @@ html.down body {
     font-family: Montserrat, sans-serif;
     font-weight: 700;
     text-transform: uppercase;
+    text-shadow: 0px 0 5px rgba(0,0,0,0.6);
 }
 
 .c-in-use {
@@ -106,6 +107,7 @@ html.down body {
     text-align: center;
     font-family: Montserrat, sans-serif;
     font-weight: 700;
+    text-shadow: 0px 0 5px rgba(0,0,0,0.6);
 }
 
 .c-down-form {
@@ -122,6 +124,7 @@ html.down body {
     margin-bottom: 20px;
     font-size: 2rem;
     text-align: center;
+    text-shadow: 0px 0 5px rgba(0,0,0,0.6);
 }
 
 .c-down-form__email {
