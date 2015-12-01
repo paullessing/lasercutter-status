@@ -31,7 +31,11 @@ class NotificationService {
                 host: 'localhost',
                 port: 25,
                 maxConnections: 5,
-                maxMessages: 100
+                maxMessages: 100,
+                secure: false,
+                tls: {
+                    rejectUnauthorized: false // TODO investigate how to use proper cert https://github.com/andris9/Nodemailer/issues/406
+                }
             }));
             transport.sendMail({
                 from: 'Laser Cutter <noreply@isthelasercutterworking.com>',
