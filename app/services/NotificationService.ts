@@ -1,5 +1,3 @@
-/// <require path="../../typings/email-validator/email-validator.d.ts">
-
 import { NotificationRepository } from '../repository/NotificationRepository';
 import { Notification } from "../entities/notification";
 import { validate as isEmailValid } from 'email-validator';

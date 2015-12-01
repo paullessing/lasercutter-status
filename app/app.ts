@@ -41,12 +41,18 @@ app.get('/', (req: express.Request, res: express.Response) => {
         isInUse: typeof req.query['inUse'] !== 'undefined',
     }) : LaserCutterService.getStatus(typeof req.query['force'] !== 'undefined');
 
+    var addStatus = (typeof req.query['success'] !== 'undefined') ? 'success' :
+        (typeof req.query['failure'] !== 'undefined') ? req.query['failure'] === 'email' ? 'email' : 'failure' : null;
+
     statusPromise.then(laserCutter => {
         res.render('index', {
             title: 'Is the Laser Cutter Working?',
             isUp: laserCutter.isUp,
             inUse: laserCutter.isInUse,
-            status: laserCutter.isUp ? 'up' : 'down'
+            status: laserCutter.isUp ? 'up' : 'down',
+            addSuccess: addStatus === 'success',
+            addFailure: addStatus === 'failure',
+            emailFailure: addStatus === 'email'
         });
     }).catch(err => {
         res.status(500).end();

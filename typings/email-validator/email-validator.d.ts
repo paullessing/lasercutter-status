@@ -1,5 +1,5 @@
 // Type definitions for email-validator 1.0.3
-// Project: http://github.com/Sembiance/email-validator
+// Project: https://github.com/Sembiance/email-validator
 // Definitions by: Paul Lessing <https://github.com/paullessing>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 

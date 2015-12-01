@@ -61,6 +61,9 @@
     },
     "nodemailer-smtp-pool/nodemailer-smtp-pool.d.ts": {
       "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "email-validator/email-validator.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
     }
   }
 }
