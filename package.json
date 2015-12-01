@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.14.1",
+    "cron": "^1.1.0",
     "email-validator": "^1.0.3",
     "express": "^4.13.3",
     "hbs": "^4.0.0",

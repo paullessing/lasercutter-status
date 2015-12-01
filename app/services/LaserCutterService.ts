@@ -9,13 +9,16 @@ class LaserCutterService {
     public getStatus(force?: boolean): Promise<Status> {
         return StatusRepository.getLatest().then(status => {
             if (status) {
-                var recently = moment().subtract(5, 'minutes');
+                var recently = moment().subtract(1, 'minutes');
                 var fetchedAt = moment(status.fetchedAt);
-                if (fetchedAt.isAfter(recently)) {
+                if (fetchedAt.isAfter(recently) && !force) {
                     return Promise.resolve(status);
                 }
             }
             return this.fetchFromHttp().then(tool => {
+                if (!status.isUp && tool.isUp) {
+                    NotificationService.executeNotify();
+                }
                 return StatusRepository.save(tool.isUp, tool.isInUse);
             }).catch(err => {
                 console.log("An error happened fetching the data", err);
@@ -32,6 +35,13 @@ class LaserCutterService {
     }
 
     private fetchFromHttp(): Promise<Tool> {
+        //return Promise.resolve(new Tool({
+        //    name: 'LaserCutter SilverTail',
+        //    status: 'Operational',
+        //    status_message: 'OK',
+        //    in_use: 'no'
+        //}));
+
         return request.get({
             url: 'https://london.hackspace.org.uk/members/tools.php?summary&anonymous',
             json: true

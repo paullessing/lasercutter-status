@@ -18,6 +18,8 @@ import bodyParser     = require('body-parser');     // pull information from HTM
 import path           = require('path');
 var app               = express();                  // create our app w/ express
 
+import { CronJob } from 'cron';
+
 mongoose.connect('mongodb://localhost:27017/lasercutter_status');
 
 // view engine setup
@@ -87,3 +89,10 @@ app.get('/status', (req: express.Request, res: express.Response) => {
 
 app.listen(port);
 console.log("App listening on port " + port);
+
+new CronJob('00 */57 * * * *', () => {
+    console.log("Cronjob running");
+    LaserCutterService.getStatus(true).catch(err => {
+        console.error("Oops cron", err);
+    }); // Force a fetch and possibly a notify
+}).start();

@@ -20,6 +20,26 @@ class NotificationRepository {
             });
         });
     }
+
+    /**
+     * Marks all currently unsent notifications as sent at: [sentAt], then returns them.
+     * This ensures that no two threads should be trying to send to the same email addresses.
+     */
+    public prepareUnsent(sentAt: Date): Promise<NotificationDocument[]> {
+        return Promise.resolve(repository.update({
+            sentAt: null
+        }, {
+            sentAt: sentAt
+        }, {
+            multi: true
+        })).then(() => {
+            return new Promise<NotificationDocument[]>((resolve, reject) => {
+                repository.find({ sentAt: sentAt }).exec((err, result) => {
+                    err && reject(err) || resolve(result)
+                });
+            });
+        });
+    }
 }
 
 let notificationRepository = new NotificationRepository();

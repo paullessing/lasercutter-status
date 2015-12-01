@@ -18,18 +18,14 @@ class NotificationService {
     }
 
     public executeNotify() {
-        NotificationRepository.getActive().then(notifications => {
-            notifications.forEach(notification => {
-                this.sendEmail(notification);
-                notification.sentAt = moment().toDate();
-                NotificationRepository.update(notification);
-            });
-        });
-    }
+        var now = moment().toDate();
 
-    private sendEmail(notification: Notification) {
-        // TODO send email
-        console.log("Sending email to", notification.email);
+        NotificationRepository.prepareUnsent(now).then(notifications => {
+            var emails = notifications.map(notification => notification.email);
+
+            console.log("Sending emails to:", emails);
+            // TODO implement
+        });
     }
 }
 
