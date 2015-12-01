@@ -3,7 +3,8 @@
 import { LaserCutterService } from './services/LaserCutterService';
 import { NotificationService } from './services/NotificationService';
 import { Tool } from './entities/tool';
-import { Status } from "./entities/status";
+import { Status } from './entities/status';
+import { Notification } from './entities/notification';
 
 var port = 8090;
 
@@ -38,7 +39,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
         fetchedAt: new Date(),
         isUp: req.query['debug'] === 'up',
         isInUse: typeof req.query['inUse'] !== 'undefined',
-    }) : LaserCutterService.getStatus(false);
+    }) : LaserCutterService.getStatus(typeof req.query['force'] !== 'undefined');
 
     statusPromise.then(laserCutter => {
         res.render('index', {
@@ -67,6 +68,11 @@ app.post('/notifyme', (req: express.Request, res: express.Response) => {
             res.redirect('/?failure');
         }
     });
+});
+
+app.post('/notify', (req: express.Request, res: express.Response) => {
+    NotificationService.executeNotify();
+    res.status(200).end();
 });
 
 app.get('/status', (req: express.Request, res: express.Response) => {
