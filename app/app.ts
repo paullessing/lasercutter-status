@@ -46,7 +46,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
 
     statusPromise.then(laserCutter => {
         res.render('index', {
-            title: 'Is the Laser Cutter Working?',
+            statusYesNo: laserCutter.isUp ? 'Yes' : 'No',
             isUp: laserCutter.isUp,
             inUse: laserCutter.isInUse,
             status: laserCutter.isUp ? 'up' : 'down',
