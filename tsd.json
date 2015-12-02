@@ -46,6 +46,24 @@
     },
     "cron/cron.d.ts": {
       "commit": "e850b6ac0d59fee86dd7cb6a1be2caf6400bde14"
+    },
+    "nodemailer/nodemailer.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "nodemailer-direct-transport/nodemailer-direct-transport.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "nodemailer-smtp-transport/nodemailer-smtp-transport.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "nodemailer/nodemailer-types.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "nodemailer-smtp-pool/nodemailer-smtp-pool.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
+    },
+    "email-validator/email-validator.d.ts": {
+      "commit": "7a3d6944036902996b87981e6150900952b35628"
     }
   }
 }
