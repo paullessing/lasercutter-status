@@ -9,7 +9,7 @@ X When up & in use, show message
   - Use chrome notifications
   - Maybe serviceworker.js?
   - Maybe chrome push notifications?
-- When unknown, link to tools page
-- Auto run TSC on npm install
 - "Unknown" status
+  - When unknown, link to tools page
+- Auto run TSC on npm install
 - "When's it going to be back up?" page with random date in the far future ("We asked a wise man and he said...")
