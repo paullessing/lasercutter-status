@@ -131,6 +131,8 @@ html.down body {
 .c-result {
     padding: 20px;
     border-radius: 4px;
+    white-space: break-word;
+    max-width: 100%;
 }
 .c-result--error {
     background-color: rgba(173,0,0,0.7);
