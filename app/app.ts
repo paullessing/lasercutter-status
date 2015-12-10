@@ -2,6 +2,7 @@
 
 import { LaserCutterService } from './services/LaserCutterService';
 import { NotificationService } from './services/NotificationService';
+import { DurationService } from './services/DurationService';
 import { Tool } from './entities/tool';
 import { Status } from './entities/status';
 import { Notification } from './entities/notification';
@@ -79,6 +80,14 @@ app.post('/notifyme', (req: express.Request, res: express.Response) => {
 app.post('/notify', (req: express.Request, res: express.Response) => {
     NotificationService.executeNotify();
     res.status(200).end();
+});
+
+app.get('/duration', (req: express.Request, res: express.Response) => {
+
+    res.render('duration', {
+        endDate: DurationService.getTime(),
+        reason: DurationService.getReason()
+    });
 });
 
 app.get('/status', (req: express.Request, res: express.Response) => {
