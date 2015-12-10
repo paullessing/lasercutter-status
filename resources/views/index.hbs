@@ -20,7 +20,7 @@
 			<form class="c-down-form" method="post" action="/notifyme">
 				{{#if addSuccess }}
 					<p class="c-result c-result--success">Your email has been saved and you will be notified when the laser cutter is back up.<br />
-						Please ensure that emails from noreply@isthelasercutterworking.com are not sorted into your spam folder.</p>
+						Please ensure that emails from noreply@&#8203;isthe&#8203;laser&#8203;cutter&#8203;working.com are not sorted into your spam folder.</p>
 				{{/if}}
 				{{#if emailFailure }}
 					<p class="c-result c-result--error">The email you entered was not valid. Please try again.</p>
@@ -33,6 +33,7 @@
 					<input class="c-down-form__email" type="email" name="email" placeholder="user@lasercutter.com" required />
 					<input class="c-down-form__submit" type="submit" value="Let me know!" />
 				{{/unless}}
+				<a class="c-link" href="/duration">I need to know exactly when it'll be fixed</a>
 			</form>
 		{{/unless}}
 	</div>
