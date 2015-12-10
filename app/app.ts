@@ -82,12 +82,17 @@ app.post('/notify', (req: express.Request, res: express.Response) => {
     res.status(200).end();
 });
 
-app.get('/duration', (req: express.Request, res: express.Response) => {
-
-    res.render('duration', {
-        endDate: DurationService.getTime(),
-        reason: DurationService.getReason()
-    });
+app.get('/howlonguntilitisfixed', (req: express.Request, res: express.Response) => {
+    LaserCutterService.getStatus().then(laserCutter => {
+        if (laserCutter.isUp) {
+            res.redirect('/');
+        } else {
+            res.render('duration', {
+                endDate: DurationService.getTime(),
+                reason: DurationService.getReason()
+            });
+        }
+    })
 });
 
 app.get('/status', (req: express.Request, res: express.Response) => {
