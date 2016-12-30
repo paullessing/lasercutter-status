@@ -44,13 +44,17 @@ class LaserCutterService {
 
         return request.get({
             url: 'https://london.hackspace.org.uk/members/tools.php?summary&anonymous',
-            json: true
+            json: true,
+            timeout: 10000
         }).then((tools: ToolDto[]) => {
-            var laserCutter = tools.filter(tool => tool.name === 'LaserCutter SilverTail').pop();
+            var laserCutter = (tools || []).filter(tool => tool.name === 'LaserCutter SilverTail').pop();
             if (!laserCutter) {
                 throw new Error('No information found about laser cutter!');
             }
             return new Tool(laserCutter);
+        }).catch((error: any) => {
+            console.error('Request failed', error);
+            throw error;
         });
     }
 }
